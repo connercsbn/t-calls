@@ -9,11 +9,16 @@ TRANSLATE_FILE = sys.argv[1]
 HOMEPAGE_FILE = sys.argv[2]
 
 def main():
-    with open( TRANSLATE_FILE ) as tf:
-        for line in tf.readlines():
+    matches = []
+    with open( TRANSLATE_FILE ) as file:
+        for line in file:
             match = re.search(r'(^.+:)(.*)', line)
             if match:
-                search_and_replace(match.group(1), match.group(2))
+                matches.append(match.group(1, 2))
+        matches.sort(key=lambda t: len(t[1]), reverse=True)
+        for match in matches:
+                search_and_replace(match[0], match[1])
+
 
 def search_and_replace(translation_key, translation):
 # Replace english phrase with corresponding t() call
