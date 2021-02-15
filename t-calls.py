@@ -1,14 +1,14 @@
 import re
 import sys
 
+if len(sys.argv) != 3:
+    print('Usage: t-calls.py [en.yml] [file.jsx]')
+    sys.exit()
+
 TRANSLATE_FILE = sys.argv[1]
 HOMEPAGE_FILE = sys.argv[2]
 
 def main():
-    if len(sys.argv) != 3:
-        print(sys.argv)
-        print('Usage: t-calls.py [en.yml] [file.jsx]')
-        return
     with open( TRANSLATE_FILE ) as tf:
         for line in tf.readlines():
             match = re.search(r'(^.+:)(.*)', line)
